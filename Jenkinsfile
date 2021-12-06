@@ -5,6 +5,10 @@ pipeline {
       steps {
         sh 'pwd'
         sh 'docker build -t $CALCULATION_SERVICE_IMAGE:latest -t $CALCULATION_SERVICE_IMAGE:$BUILD_NUMBER .'
+        dir(path: 'source/calculation-offer-service/CalculationServiceAPISolution') {
+          sh 'pwd'
+        }
+
       }
     }
 
