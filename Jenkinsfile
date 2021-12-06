@@ -37,6 +37,10 @@ pipeline {
             dir(path: 'source/creditcard-service') {
               sh 'pwd'
               sh 'docker build -t $CREDIT_SERVICE:latest -t $CREDIT_SERVICE:$BUILD_NUMBER .'
+              sh 'docker tag $CREDIT_SERVICE:latest $ECR_ID/$CREDIT_SERVICE:latest'
+              sh 'docker tag $CREDIT_SERVICE:$BUILD_NUMBER $ECR_ID/$CREDIT_SERVICE:$BUILD_NUMBER'
+              sh 'docker image prune -f'
+              sh 'docker push $ECR_ID/$CREDIT_SERVICE:latest'
             }
 
           }
