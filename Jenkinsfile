@@ -51,6 +51,10 @@ pipeline {
             dir(path: 'source/email-service') {
               sh 'pwd'
               sh 'docker build -t $EMAIL_SERVICE:latest -t $EMAIL_SERVICE:$BUILD_NUMBER .'
+              sh 'docker tag $EMAIL_SERVICE:latest $ECR_ID/$EMAIL_SERVICE:latest'
+              sh 'docker tag $EMAIL_SERVICE:$BUILD_NUMBER $ECR_ID/$EMAIL_SERVICE:$BUILD_NUMBER'
+              sh 'docker image prune -f'
+              sh 'docker push $ECR_ID/$EMAIL_SERVICE:latest '
             }
 
           }
