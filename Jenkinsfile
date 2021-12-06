@@ -46,6 +46,16 @@ pipeline {
           }
         }
 
+        stage('email-service') {
+          steps {
+            dir(path: 'source/email-service') {
+              sh 'pwd'
+              sh 'docker build -t $EMAIL_SERVICE:latest -t $EMAIL_SERVICE:$BUILD_NUMBER .'
+            }
+
+          }
+        }
+
       }
     }
 
@@ -56,5 +66,6 @@ pipeline {
     ECR_CREDENTIALS = credentials('ecr-credentials')
     CREDITCARD_RESPONSE_DAEMON = 'tejasv2-creditcard-identity-verification-response-daemon'
     CREDIT_SERVICE = 'tejasv2-creditcard-service'
+    EMAIL_SERVICE = 'tejasv2-email-service'
   }
 }
