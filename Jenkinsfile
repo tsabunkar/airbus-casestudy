@@ -36,6 +36,7 @@ pipeline {
           steps {
             dir(path: 'source/creditcard-service') {
               sh 'pwd'
+              sh 'docker build -t $CREDIT_SERVICE:latest -t $CREDIT_SERVICE:$BUILD_NUMBER .'
             }
 
           }
@@ -50,5 +51,6 @@ pipeline {
     CALCULATION_SERVICE_IMAGE = 'tejasv2-casestudy-calculation-service'
     ECR_CREDENTIALS = credentials('ecr-credentials')
     CREDITCARD_RESPONSE_DAEMON = 'tejasv2-creditcard-identity-verification-response-daemon'
+    CREDIT_SERVICE = 'tejasv2-creditcard-service'
   }
 }
