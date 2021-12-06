@@ -4,6 +4,7 @@ pipeline {
     stage('docker-cmds') {
       steps {
         sh 'pwd'
+        sh 'docker build -t $CALCULATION_SERVICE_IMAGE:latest -t $CALCULATION_SERVICE_IMAGE:$BUILD_NUMBER .'
       }
     }
 
