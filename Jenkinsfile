@@ -32,6 +32,15 @@ pipeline {
           }
         }
 
+        stage('creditcard-service') {
+          steps {
+            dir(path: 'source/creditcard-service') {
+              sh 'pwd'
+            }
+
+          }
+        }
+
       }
     }
 
