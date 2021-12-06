@@ -23,9 +23,11 @@ pipeline {
             dir(path: 'source/creditcard-identity-verification-response-daemon') {
               sh 'pwd'
               sh 'docker build -t $CREDITCARD_RESPONSE_DAEMON:latest -t $CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER .'
+              sh 'docker tag $CREDITCARD_RESPONSE_DAEMON:latest $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:latest'
+              sh 'docker tag $CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER'
+              sh 'docker image prune -f'
             }
 
-            sh 'docker tag $CREDITCARD_RESPONSE_DAEMON:latest $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:latest'
           }
         }
 
