@@ -60,6 +60,20 @@ pipeline {
           }
         }
 
+        stage('identity-verification-service') {
+          steps {
+            dir(path: 'source/identity-verification-service') {
+              sh 'pwd'
+              sh 'docker build -t $IDENTITY_VERIFICATION:latest -t $IDENTITY_VERIFICATION:$BUILD_NUMBER .'
+              sh 'docker tag $IDENTITY_VERIFICATION:latest $ECR_ID/$IDENTITY_VERIFICATION:latest'
+              sh 'docker tag $IDENTITY_VERIFICATION:$BUILD_NUMBER $ECR_ID/$IDENTITY_VERIFICATION:$BUILD_NUMBER'
+              sh 'docker image prune -f'
+              sh 'docker push $ECR_ID/$IDENTITY_VERIFICATION:latest'
+            }
+
+          }
+        }
+
       }
     }
 
@@ -71,5 +85,6 @@ pipeline {
     CREDITCARD_RESPONSE_DAEMON = 'tejasv2-creditcard-identity-verification-response-daemon'
     CREDIT_SERVICE = 'tejasv2-creditcard-service'
     EMAIL_SERVICE = 'tejasv2-email-service'
+    IDENTITY_VERIFICATION = 'tejasv2-identity-verification-service'
   }
 }
