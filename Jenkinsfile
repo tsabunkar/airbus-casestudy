@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('docker-cmds') {
+    stage('casestudy-calculation') {
       steps {
         dir(path: 'source/calculation-offer-service/CalculationServiceAPISolution') {
           sh 'pwd'
