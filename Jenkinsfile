@@ -26,6 +26,7 @@ pipeline {
               sh 'docker tag $CREDITCARD_RESPONSE_DAEMON:latest $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:latest'
               sh 'docker tag $CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER'
               sh 'docker image prune -f'
+              sh 'docker push $ECR_ID/$CREDITCARD_RESPONSE_DAEMON:latest'
             }
 
           }
