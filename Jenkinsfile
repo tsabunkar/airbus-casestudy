@@ -22,6 +22,7 @@ pipeline {
           steps {
             dir(path: 'source/creditcard-identity-verification-response-daemon') {
               sh 'pwd'
+              sh 'docker build -t $CREDITCARD_RESPONSE_DAEMON:latest -t $CREDITCARD_RESPONSE_DAEMON:$BUILD_NUMBER .'
             }
 
           }
@@ -35,5 +36,6 @@ pipeline {
     ECR_ID = '142198642907.dkr.ecr.ca-central-1.amazonaws.com'
     CALCULATION_SERVICE_IMAGE = 'tejasv2-casestudy-calculation-service'
     ECR_CREDENTIALS = credentials('ecr-credentials')
+    CREDITCARD_RESPONSE_DAEMON = 'tejasv2-creditcard-identity-verification-response-daemon'
   }
 }
